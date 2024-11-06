@@ -24,7 +24,9 @@ class UserPolicy
 
     public function create(User $user): Response
     {
-        return Response::deny('You do not have permission to create users!');
+        return $user->can('manage users')
+            ? Response::allow()
+            : Response::deny('You do not have permission to create users!');
     }
 
     public function update(User $user, User $model): Response
