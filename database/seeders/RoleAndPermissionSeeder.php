@@ -20,7 +20,7 @@ class RoleAndPermissionSeeder extends Seeder
 
         $user = User::query()->where('name', 'user')->first();
         $userRole = Role::create(['name' => 'user']);
-        $user->assignRole('admin');
+        $user->assignRole('user');
 
 
     }
