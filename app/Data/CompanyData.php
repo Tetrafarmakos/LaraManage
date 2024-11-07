@@ -9,8 +9,8 @@ use Spatie\LaravelData\Data;
 class CompanyData extends Data
 {
     public function __construct(
-        public string|Optional|null $id,
-        public string               $name
+        public ?string $id,
+        public string  $name
     )
     {
     }

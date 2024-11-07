@@ -13,46 +13,46 @@ class CompanyPolicy
 
     public function viewAny(User $user): Response
     {
-        return $user->can('manage users')
+        return $user->can('manage companies')
             ? Response::allow()
-            : Response::deny('You do not have permission to view any users!');
+            : Response::deny('You do not have permission to view any companies!');
     }
 
     public function view(User $user): Response
     {
-        return $user->can('manage users')
+        return $user->can('manage companies')
             ? Response::allow()
-            : Response::deny('You do not have permission to view a user!');
+            : Response::deny('You do not have permission to view a company!');
     }
 
     public function create(User $user): Response
     {
-        return $user->can('manage users')
+        return $user->can('manage companies')
             ? Response::allow()
-            : Response::deny('You do not have permission to create users!');
+            : Response::deny('You do not have permission to create companies!');
     }
 
     public function update(User $user): Response
     {
-        return $user->can('manage users')
+        return $user->can('manage companies')
             ? Response::allow()
-            : Response::deny('You do not have permission to update users!');
+            : Response::deny('You do not have permission to update companies!');
     }
 
     public function delete(User $user): Response
     {
-        return $user->can('manage users')
+        return $user->can('manage companies')
             ? Response::allow()
-            : Response::deny('You do not have permission to delete users!');
+            : Response::deny('You do not have permission to delete companies!');
     }
 
-    public function restore(User $user, User $model): Response
+    public function restore(User $user, Company $model): Response
     {
-        return Response::deny('You do not have permission to restore users!');
+        return Response::deny('You do not have permission to restore companies!');
     }
 
-    public function forceDelete(User $user, User $model): Response
+    public function forceDelete(User $user, Company $model): Response
     {
-        return Response::deny('You do not have permission to force delete users!');
+        return Response::deny('You do not have permission to force delete companies!');
     }
 }
