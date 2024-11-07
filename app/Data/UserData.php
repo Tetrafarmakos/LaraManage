@@ -10,7 +10,7 @@ use Illuminate\Validation\Rule;
 class UserData extends Data
 {
     public function __construct(
-        public ?string $id,
+        public ?string     $id,
         public string      $name,
         public string      $email,
         public string|Lazy $password,
@@ -32,7 +32,7 @@ class UserData extends Data
     {
         return [
             'name' => ['required', 'string'],
-            'email' => ['required', 'email',Rule::unique('users')->ignore(request()->route('user'))],
+            'email' => ['required', 'email', Rule::unique('users')->ignore(request()->route('user'))],
             'password' => ['required', 'string', 'min_digits:8'],
         ];
     }
@@ -42,10 +42,5 @@ class UserData extends Data
         return [
             'password' => true,
         ];
-    }
-
-    private static function isUpdate(): bool
-    {
-        return request()->route('user') !== null;
     }
 }
