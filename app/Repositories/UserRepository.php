@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Data\UserData;
+use App\Events\UserCreated;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
@@ -14,10 +15,14 @@ class UserRepository
 
     static public function store(UserData $data): User
     {
-        return User::query()->create([
+        $user = User::query()->create([
             'name' => $data->name,
             'email' => $data->email,
             'password' => Hash::make($data->password),
         ]);
+
+        UserCreated::dispatch($user);
+
+        return $user;
     }
 }
