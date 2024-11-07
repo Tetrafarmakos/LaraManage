@@ -18,11 +18,25 @@ class UserRepository
         $user = User::query()->create([
             'name' => $data->name,
             'email' => $data->email,
-            'password' => Hash::make($data->password),
+            'password' => Hash::make($data->password)
         ]);
 
         UserCreated::dispatch($user);
 
         return $user;
+    }
+
+    public function update(UserData $data): bool
+    {
+        return $this->user->update([
+            'name' => $data->name,
+            'email' => $data->email,
+            'password' => Hash::make($data->password),
+        ]);
+    }
+
+    public function destroy(): bool
+    {
+        return $this->user->delete();
     }
 }

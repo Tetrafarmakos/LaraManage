@@ -17,9 +17,11 @@ class UserPolicy
             : Response::deny('You do not have permission to view any users!');
     }
 
-    public function view(User $user, User $model): Response
+    public function view(User $user): Response
     {
-        return Response::deny('You do not have permission to view a user!');
+        return $user->can('manage users')
+            ? Response::allow()
+            : Response::deny('You do not have permission to view a user!');
     }
 
     public function create(User $user): Response
@@ -29,14 +31,18 @@ class UserPolicy
             : Response::deny('You do not have permission to create users!');
     }
 
-    public function update(User $user, User $model): Response
+    public function update(User $user): Response
     {
-        return Response::deny('You do not have permission to update users!');
+        return $user->can('manage users')
+            ? Response::allow()
+            : Response::deny('You do not have permission to update users!');
     }
 
-    public function delete(User $user, User $model): Response
+    public function delete(User $user): Response
     {
-        return Response::deny('You do not have permission to delete users!');
+        return $user->can('manage users')
+            ? Response::allow()
+            : Response::deny('You do not have permission to delete users!');
     }
 
     public function restore(User $user, User $model): Response
