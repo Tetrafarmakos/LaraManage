@@ -18,9 +18,10 @@ class ProjectPolicy
             : Response::deny('You do not have permission to view any projects!');
     }
 
-    public function view(User $user): Response
+    public function view(User $user, Project $project): Response
     {
-        return $user->can('manage projects')
+        return $user->can('manage projects') ||
+        ($user->can('access my project') && $user->companies->contains($project->company_id))
             ? Response::allow()
             : Response::deny('You do not have permission to view a project!');
     }
