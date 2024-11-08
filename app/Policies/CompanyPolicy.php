@@ -18,11 +18,12 @@ class CompanyPolicy
             : Response::deny('You do not have permission to view any companies!');
     }
 
-    public function view(User $user): Response
+    public function view(User $user, Company $company): Response
     {
-        return $user->can('manage companies')
+        return $user->can('manage companies') ||
+        ($user->can('access my company') && $user->companies()->where('id', $company->id)->exists())
             ? Response::allow()
-            : Response::deny('You do not have permission to view a company!');
+            : Response::deny('You do not have permission to view this company!');
     }
 
     public function create(User $user): Response

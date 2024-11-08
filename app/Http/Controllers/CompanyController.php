@@ -54,6 +54,13 @@ class CompanyController extends Controller
 
         $company->repository()->assignUser($user);
 
-        return response()->json('Success');
+        return response()->json(['message' => 'User assigned to company successfully.']);
+    }
+
+    public function removeUser(Company $company, User $user)
+    {
+        $company->repository()->removeUser($user);
+
+        return response()->json(['message' => 'User removed from company successfully.']);
     }
 }

@@ -36,4 +36,9 @@ class CompanyRepository
     {
         $this->company->users()->attach($user->id);
     }
+
+    public function removeUser(User $user): void
+    {
+        $this->company->users()->detach($user->id);
+    }
 }
