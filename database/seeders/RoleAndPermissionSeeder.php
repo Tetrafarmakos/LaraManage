@@ -14,6 +14,8 @@ class RoleAndPermissionSeeder extends Seeder
         Permission::firstOrCreate(['name' => 'manage users']);
         Permission::firstOrCreate(['name' => 'manage companies']);
         Permission::firstOrCreate(['name' => 'manage projects']);
+        Permission::firstOrCreate(['name' => 'access my company']);
+        Permission::firstOrCreate(['name' => 'access my project']);
 
         $admin = User::query()->where('name', 'admin')->first();
         $adminRole = Role::firstOrCreate(['name' => 'admin']);
@@ -24,6 +26,8 @@ class RoleAndPermissionSeeder extends Seeder
 
         $user = User::query()->where('name', 'user')->first();
         $userRole = Role::firstOrCreate(['name' => 'user']);
+        $userRole->givePermissionTo('access my company');
+        $userRole->givePermissionTo('access my project');
         $user->assignRole('user');
 
 
