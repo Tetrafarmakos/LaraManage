@@ -3,14 +3,16 @@
 namespace App\Data;
 
 use App\Models\Company;
-use Illuminate\Support\Optional;
 use Spatie\LaravelData\Data;
+use Spatie\LaravelData\Lazy;
 
 class CompanyData extends Data
 {
     public function __construct(
         public ?string $id,
-        public string  $name
+        public string  $name,
+        /** @var array<ProjectData> */
+        public Lazy|array $projects
     )
     {
     }
@@ -19,7 +21,8 @@ class CompanyData extends Data
     {
         return new self(
             $company->id,
-            $company->name
+            $company->name,
+            Lazy::create(fn() => ProjectData::collect($company->projects))
         );
     }
 

@@ -31,7 +31,7 @@ class CompanyController extends Controller
     {
         Gate::authorize('view', $company);
 
-        return response()->json(CompanyData::from($company));
+        return response()->json(CompanyData::from($company)->include('projects'));
     }
 
     public function update(CompanyData $data, Company $company)
