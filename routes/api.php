@@ -19,5 +19,6 @@ Route::middleware('guest')->group(function () {
 Route::middleware('auth:sanctum')->group(function () {
     Route::resource('users', UserController::class)->except(['create', 'edit']);
     Route::resource('companies', CompanyController::class)->except(['create', 'edit']);
+    Route::post('companies/{company}/assign-user/{user}', [CompanyController::class, 'assignUser']);
     Route::resource('projects', ProjectController::class)->except(['create', 'edit']);
 });

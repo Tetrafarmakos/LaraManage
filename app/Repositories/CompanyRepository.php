@@ -3,7 +3,9 @@
 namespace App\Repositories;
 
 use App\Data\CompanyData;
+use App\Data\UserData;
 use App\Models\Company;
+use App\Models\User;
 
 class CompanyRepository
 {
@@ -28,5 +30,10 @@ class CompanyRepository
     public function destroy(): bool
     {
         return $this->company->delete();
+    }
+
+    public function assignUser(User $user): void
+    {
+        $this->company->users()->attach($user->id);
     }
 }

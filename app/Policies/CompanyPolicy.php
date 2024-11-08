@@ -55,4 +55,11 @@ class CompanyPolicy
     {
         return Response::deny('You do not have permission to force delete companies!');
     }
+
+    public function assign(User $user): Response
+    {
+        return $user->can('manage companies')
+            ? Response::allow()
+            : Response::deny('You do not have permission to assign user to a company!');
+    }
 }

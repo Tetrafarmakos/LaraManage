@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Data\CompanyData;
 use App\Models\Company;
+use App\Models\User;
 use App\Repositories\CompanyRepository;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Gate;
@@ -45,5 +46,14 @@ class CompanyController extends Controller
         Gate::authorize('delete', $company);
 
         return response()->json($company->repository()->destroy());
+    }
+
+    public function assignUser(Company $company, User $user)
+    {
+        Gate::authorize('assign', Company::class);
+
+        $company->repository()->assignUser($user);
+
+        return response()->json('Success');
     }
 }
