@@ -59,6 +59,8 @@ class CompanyController extends Controller
 
     public function removeUser(Company $company, User $user)
     {
+        Gate::authorize('assign', Company::class);
+
         $company->repository()->removeUser($user);
 
         return response()->json(['message' => 'User removed from company successfully.']);
