@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Data\ProjectData;
+use App\Enums\ProjectTypeEnum;
 use App\Models\Project;
 
 class ProjectRepository
@@ -13,12 +14,21 @@ class ProjectRepository
 
     static public function store(ProjectData $data): Project
     {
-        return Project::query()->create([
+        $project = Project::query()->create([
             'name' => $data->name,
             'description' => $data->description,
             'company_id' => $data->company_id,
-            'type' => $data->type
+            'type' => ProjectTypeEnum::from($data->type)
         ]);
+
+        if ($project->isComplex()) {
+            $project->complexDetails()->create([
+                'budget' => $data->budget,
+                'timeline' => $data->timeline
+            ]);
+        }
+
+        return $project;
     }
 
     public function update(ProjectData $data): bool

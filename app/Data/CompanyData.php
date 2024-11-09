@@ -29,7 +29,7 @@ class CompanyData extends Data
     public static function rules(): array
     {
         return [
-            'name' => ['required', 'string', 'unique:companies'],
+            'name' => ['required', 'string', 'unique:companies', 'max:255'],
         ];
     }
 }
