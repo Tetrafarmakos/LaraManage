@@ -33,12 +33,21 @@ class ProjectRepository
 
     public function update(ProjectData $data): bool
     {
-        return $this->project->update([
+        $updated = $this->project->update([
             'name' => $data->name,
             'description' => $data->description,
             'company_id' => $data->company_id,
             'type' => $data->type
         ]);
+
+        if ($this->project->isComplex()) {
+            $this->project->complexDetails()->create([
+                'budget' => $data->budget,
+                'timeline' => $data->timeline
+            ]);
+        }
+
+        return $updated;
     }
 
     public function destroy(): bool
