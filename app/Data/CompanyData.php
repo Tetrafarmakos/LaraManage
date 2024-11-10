@@ -12,7 +12,7 @@ class CompanyData extends Data
         public ?string $id,
         public string  $name,
         /** @var array<ProjectData> */
-        public Lazy|array $projects
+        public Lazy|array|null $projects
     )
     {
     }
