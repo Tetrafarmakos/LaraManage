@@ -31,9 +31,9 @@ class UserData extends Data
     public static function rules(): array
     {
         return [
-            'name' => ['required', 'string'],
-            'email' => ['required', 'email', Rule::unique('users')->ignore(request()->route('user'))],
-            'password' => ['required', 'string', 'min_digits:8'],
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'email', Rule::unique('users')->ignore(request()->route('user')), 'max:255'],
+            'password' => ['required', 'string', 'min_digits:8', 'max:255'],
         ];
     }
 

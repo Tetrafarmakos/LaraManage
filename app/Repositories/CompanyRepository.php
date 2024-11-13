@@ -3,7 +3,6 @@
 namespace App\Repositories;
 
 use App\Data\CompanyData;
-use App\Data\UserData;
 use App\Models\Company;
 use App\Models\User;
 

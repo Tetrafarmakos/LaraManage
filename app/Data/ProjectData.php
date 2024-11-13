@@ -6,7 +6,6 @@ use App\Models\Project;
 use DateTime;
 use Spatie\LaravelData\Attributes\WithCast;
 use Spatie\LaravelData\Casts\DateTimeInterfaceCast;
-use Spatie\LaravelData\Optional;
 use Spatie\LaravelData\Data;
 
 class ProjectData extends Data

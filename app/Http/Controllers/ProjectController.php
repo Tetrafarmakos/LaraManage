@@ -6,7 +6,6 @@ use App\Data\ProjectData;
 use App\Models\Project;
 use App\Repositories\ProjectRepository;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
 class ProjectController extends Controller
